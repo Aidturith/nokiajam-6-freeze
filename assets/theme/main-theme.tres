@@ -1,12 +1,26 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dxpjsxjcktnp8"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dxpjsxjcktnp8"]
 
-[ext_resource type="FontFile" uid="uid://cpxiyj34edml5" path="res://assets/fonts/nokia/nokiafc22.ttf" id="1_lmh1p"]
+[ext_resource type="FontFile" uid="uid://cujrwndwjdics" path="res://assets/fonts/zepto/Zepto-Regular.ttf" id="1_q01qk"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_nm0w0"]
+thickness = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_bkdde"]
+thickness = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_66e1o"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ai8l"]
 
 [resource]
-default_font = ExtResource("1_lmh1p")
+default_font = ExtResource("1_q01qk")
 default_font_size = 8
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 8
+Button/styles/focus = SubResource("StyleBoxLine_nm0w0")
+Button/styles/hover = SubResource("StyleBoxLine_bkdde")
+Button/styles/normal = SubResource("StyleBoxFlat_66e1o")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/colors/font_outline_color = Color(1, 1, 1, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0)
@@ -15,4 +29,5 @@ Label/constants/outline_size = 4
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/constants/shadow_outline_size = 1
+Label/fonts/font = ExtResource("1_q01qk")
 Label/styles/normal = SubResource("StyleBoxEmpty_0ai8l")
