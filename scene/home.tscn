@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://3e4g5y3t7dkn"]
 
-[ext_resource type="Script" path="res://scene/tamagochi.gd" id="1_7ih63"]
+[ext_resource type="Script" path="res://scene/home.gd" id="1_7ih63"]
 [ext_resource type="Theme" uid="uid://dxpjsxjcktnp8" path="res://assets/theme/main-theme.tres" id="2_m5ylw"]
 
 [sub_resource type="Animation" id="Animation_lmwob"]
@@ -17,7 +17,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mfn0e"]
@@ -45,14 +45,10 @@ states/idle/position = Vector2(607, 80)
 transitions = ["Start", "End", SubResource("AnimationNodeStateMachineTransition_phg2y"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_rxxml"), "idle", "End", SubResource("AnimationNodeStateMachineTransition_yk2gk")]
 graph_offset = Vector2(-3, 4)
 
-[node name="Tamagochi" type="Node2D"]
+[node name="Home" type="Node"]
 script = ExtResource("1_7ih63")
 
-[node name="ScreenLimit" type="Marker2D" parent="."]
-position = Vector2(84, 48)
-
 [node name="Character" type="Node2D" parent="."]
-position = Vector2(0, 1.43796)
 
 [node name="Debug" type="Label" parent="Character"]
 offset_left = 35.0
@@ -83,56 +79,74 @@ offset_top = 34.0
 offset_right = 84.0
 offset_bottom = 48.0
 
-[node name="Food" type="Button" parent="Menu"]
-layout_mode = 0
-offset_right = 14.0
-offset_bottom = 14.0
+[node name="Container" type="HBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Food" type="Button" parent="Menu/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../Skate")
+focus_next = NodePath("../Skate")
 theme = ExtResource("2_m5ylw")
 text = "Fo"
 
-[node name="Skate" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 14.0
-offset_right = 28.0
-offset_bottom = 14.0
+[node name="Skate" type="Button" parent="Menu/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../Food")
+focus_neighbor_right = NodePath("../Sleep")
+focus_next = NodePath("../Sleep")
+focus_previous = NodePath("../Food")
 theme = ExtResource("2_m5ylw")
 text = "Sk"
 
-[node name="Sleep" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 28.0
-offset_right = 42.0
-offset_bottom = 14.0
+[node name="Sleep" type="Button" parent="Menu/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../Skate")
+focus_neighbor_right = NodePath("../Cure")
+focus_next = NodePath("../Cure")
+focus_previous = NodePath("../Skate")
 theme = ExtResource("2_m5ylw")
 text = "SL"
 
-[node name="Cure" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 42.0
-offset_right = 56.0
-offset_bottom = 14.0
+[node name="Cure" type="Button" parent="Menu/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../Sleep")
+focus_neighbor_right = NodePath("../Clean")
+focus_next = NodePath("../Clean")
+focus_previous = NodePath("../Sleep")
 theme = ExtResource("2_m5ylw")
 text = "Cu"
 
-[node name="Clean" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 56.0
-offset_right = 70.0
-offset_bottom = 14.0
+[node name="Clean" type="Button" parent="Menu/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../Cure")
+focus_neighbor_right = NodePath("../Stats")
+focus_next = NodePath("../Stats")
+focus_previous = NodePath("../Cure")
 theme = ExtResource("2_m5ylw")
 text = "CL"
 
-[node name="Stats" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 70.0
-offset_right = 84.0
-offset_bottom = 14.0
+[node name="Stats" type="Button" parent="Menu/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../Clean")
+focus_previous = NodePath("../Clean")
 theme = ExtResource("2_m5ylw")
 text = "St"
 
-[connection signal="pressed" from="Menu/Food" to="." method="_on_food_pressed"]
-[connection signal="pressed" from="Menu/Skate" to="." method="_on_skate_pressed"]
-[connection signal="pressed" from="Menu/Sleep" to="." method="_on_sleep_pressed"]
-[connection signal="pressed" from="Menu/Cure" to="." method="_on_cure_pressed"]
-[connection signal="pressed" from="Menu/Clean" to="." method="_on_clean_pressed"]
-[connection signal="pressed" from="Menu/Stats" to="." method="_on_stats_pressed"]
+[connection signal="pressed" from="Menu/Container/Food" to="." method="_on_food_pressed"]
+[connection signal="pressed" from="Menu/Container/Skate" to="." method="_on_skate_pressed"]
+[connection signal="pressed" from="Menu/Container/Sleep" to="." method="_on_sleep_pressed"]
+[connection signal="pressed" from="Menu/Container/Cure" to="." method="_on_cure_pressed"]
+[connection signal="pressed" from="Menu/Container/Clean" to="." method="_on_clean_pressed"]
+[connection signal="pressed" from="Menu/Container/Stats" to="." method="_on_stats_pressed"]

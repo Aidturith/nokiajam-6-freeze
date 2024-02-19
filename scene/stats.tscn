@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://dryd1nn4y3x68"]
+
+[ext_resource type="Script" path="res://scene/stats.gd" id="1_bh603"]
+[ext_resource type="Theme" uid="uid://dxpjsxjcktnp8" path="res://assets/theme/main-theme.tres" id="1_f33n1"]
+
+[node name="Stats" type="Node"]
+script = ExtResource("1_bh603")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 84.0
+offset_bottom = 48.0
+metadata/_edit_group_ = true
+
+[node name="Scroll" type="ScrollContainer" parent="Menu"]
+layout_mode = 0
+offset_right = 84.0
+offset_bottom = 48.0
+
+[node name="Container" type="VBoxContainer" parent="Menu/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_f33n1")
+theme_override_constants/separation = 2
+
+[node name="Age" type="Label" parent="Menu/Scroll/Container"]
+layout_mode = 2
+text = "Age : 999 years"
+
+[node name="Weight" type="Label" parent="Menu/Scroll/Container"]
+layout_mode = 2
+text = "Weight : 999 kgs"
+
+[node name="Hungry" type="Label" parent="Menu/Scroll/Container"]
+layout_mode = 2
+text = "Hungry : OOOO"
+
+[node name="Happy" type="Label" parent="Menu/Scroll/Container"]
+layout_mode = 2
+text = "Happy : OOOO"
+
+[node name="Tricks" type="Label" parent="Menu/Scroll/Container"]
+layout_mode = 2
+text = "Tricks"
+
+[node name="Medals" type="Label" parent="Menu/Scroll/Container"]
+layout_mode = 2
+text = "Medals"
+
+[node name="Mistakes" type="Label" parent="Menu/Scroll/Container" groups=["debug"]]
+layout_mode = 2
+
+[node name="NbTrash" type="Label" parent="Menu/Scroll/Container" groups=["debug"]]
+layout_mode = 2
+
+[node name="NbPoo" type="Label" parent="Menu/Scroll/Container" groups=["debug"]]
+layout_mode = 2
+
+[node name="ScreenLimit" type="Marker2D" parent="."]
+position = Vector2(84, 48)

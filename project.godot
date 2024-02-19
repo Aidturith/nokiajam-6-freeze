@@ -16,6 +16,12 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=15
 config/icon="res://icon.svg"
 
+[autoload]
+
+Const="*res://const.gd"
+Tama="*res://tama.gd"
+Global="*res://global.gd"
+
 [gui]
 
 fonts/dynamic_fonts/use_oversampling=false
@@ -98,6 +104,10 @@ move_down={
 [internationalization]
 
 locale/translations=PackedStringArray("res://assets/i18n/translations.en.translation", "res://assets/i18n/translations.fr.translation", "res://assets/i18n/translations.es.translation")
+
+[layer_names]
+
+2d_render/layer_10="debug"
 
 [rendering]
 
