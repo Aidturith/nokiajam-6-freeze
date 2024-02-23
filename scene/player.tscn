@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://cstdudqa7kwjk"]
+
+[ext_resource type="Script" path="res://scene/player.gd" id="1_68mff"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1wq88"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbp8d"]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+roughness = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ak3kb"]
+material = SubResource("StandardMaterial3D_gbp8d")
+height = 0.05
+radial_segments = 16
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ilrkp"]
+metallic_specular = 0.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_e2tu0"]
+material = SubResource("StandardMaterial3D_ilrkp")
+flip_faces = true
+top_radius = 0.55
+bottom_radius = 0.55
+height = 0.1
+radial_segments = 16
+rings = 1
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_68mff")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+shape = SubResource("SphereShape3D_1wq88")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.46, 0)
+mesh = SubResource("CylinderMesh_ak3kb")
+
+[node name="CellShading" type="MeshInstance3D" parent="Body"]
+mesh = SubResource("CylinderMesh_e2tu0")
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.386246, 1.46791)
+current = true

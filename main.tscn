@@ -26,8 +26,6 @@ offset_bottom = 40.0
 
 [node name="Screen" type="SubViewport" parent="SubViewportContainer"]
 unique_name_in_owner = true
-disable_3d = true
-transparent_bg = true
 handle_input_locally = false
 snap_2d_vertices_to_pixel = true
 size = Vector2i(84, 48)

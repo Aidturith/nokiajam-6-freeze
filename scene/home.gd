@@ -8,41 +8,35 @@ func _ready():
 func _process(_delta):
 	if OS.is_debug_build():
 		$Character/Debug.text = Const.STAGE_LABELS[Tama.stage]
+	# display trashes
+	var poo_added = 0
+	for spawn in $SpawnPoints.get_children():
+		if poo_added < Tama.nb_poo:
+			var poo_s = ResourceLoader.load("res://scene/spawnable/poo.tscn")
+			var poo = poo_s.instantiate()
+			poo.position = spawn.position
+			$Cleanables.add_child(poo)
+			poo_added += 1
+
 
 # hungry system
 
 func feed_meal():
-	gain_hungry_hearts(Const.HUNGRY_MAX)
+	Tama.add_hungry_heart(Const.HUNGRY_MAX)
 	gain_weight(1)
-	spawn_trash(0.5)
 
 func feed_snack():
 	gain_happy_hearts(1)
 	gain_weight(2)
-	spawn_trash(0.2)
 
 func deplete_hungry_hearts(nb: int):
 	Tama.hungry = max(0, Tama.hungry - nb)
-
-func gain_hungry_hearts(nb: int):
-	var hungry_before = Tama.hungry
-	Tama.hungry = min(Const.HUNGRY_MAX, Tama.hungry + nb)
-	Tama.hungry_gain = Tama.hungry - hungry_before
-	spawn_poo()
 
 func gain_happy_hearts(nb: int):
 	Tama.happy = min(Const.HAPPY_MAX, Tama.happy + nb)
 
 func gain_weight(kg: int):
 	Tama.weight += kg
-
-func spawn_trash(chance: float):
-	if randf() <= chance:
-		Tama.nb_trash += 1
-
-func spawn_poo():
-	if Tama.hungry_gain % Const.HUNGRY_MAX == 0:
-		Tama.nb_poo += 1
 
 # sleep system
 
@@ -96,7 +90,7 @@ func _on_food_pressed():
 func _on_skate_pressed():
 	if OS.is_debug_build():
 		print("skate")
-	pass
+	Global.goto_scene("res://scene/skate.tscn")
 
 
 func _on_sleep_pressed():

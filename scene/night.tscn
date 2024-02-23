@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgm1xw5d7s5ts"]
+
+[sub_resource type="Curve2D" id="Curve2D_n63x5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 13, 26, 0, 0, 0, 0, 31, 15, 0, 0, 0, 0, 55, 15, 0, 0, 0, 0, 72, 26, 0, 0, 0, 0, 84, 48)
+}
+point_count = 6
+
+[node name="Night" type="Node"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_n63x5")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(0, 47)
+rotation = -1.01649
+rotates = false
+
+[node name="Moon" type="Node2D" parent="Path2D/PathFollow2D"]
+
+[node name="Label" type="Label" parent="Path2D/PathFollow2D/Moon"]
+offset_right = 16.0
+offset_bottom = 10.0
+text = "Moon"
+
+[node name="ScreenLimit" type="Marker2D" parent="."]
+position = Vector2(84, 48)

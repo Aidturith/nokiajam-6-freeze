@@ -72,6 +72,30 @@ libraries = {
 "": SubResource("AnimationLibrary_mfn0e")
 }
 
+[node name="Cleanables" type="Node" parent="."]
+
+[node name="SpawnPoints" type="Node" parent="."]
+
+[node name="Spawn" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(13, 8)
+gizmo_extents = 3.0
+
+[node name="Spawn2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(51, 27)
+gizmo_extents = 3.0
+
+[node name="Spawn3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(77, 23)
+gizmo_extents = 3.0
+
+[node name="Spawn4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(20, 22)
+gizmo_extents = 3.0
+
+[node name="Spawn5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(54, 5)
+gizmo_extents = 3.0
+
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0

@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhj54hjgm2sp1"
-path.s3tc="res://.godot/imported/icon_food.png-acfedd8fb8394b6f40520e93ace6dc3b.s3tc.ctex"
+uid="uid://bsgxcsnmtpm2v"
+path="res://.godot/imported/ice.png-22eeafb8981b2ff9aca9808d98ad4fef.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/icon_food.png"
-dest_files=["res://.godot/imported/icon_food.png-acfedd8fb8394b6f40520e93ace6dc3b.s3tc.ctex"]
+source_file="res://assets/textures/ice.png"
+dest_files=["res://.godot/imported/ice.png-22eeafb8981b2ff9aca9808d98ad4fef.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
