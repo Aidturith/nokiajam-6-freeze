@@ -7,6 +7,9 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _ready():
+	$BodyParts/AnimationPlayer.play('idle')
+
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -34,7 +37,13 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED / 300)
 	
 	# rotate
-	rotation.y = atan2(velocity.x, velocity.z)
-	print(rotation.y)
+	# rotation.y = atan2(velocity.x, velocity.z)
+	# print(rotation.y)
 
 	move_and_slide()
+	
+	var total_speed = velocity.x + velocity.y + velocity.z
+	if total_speed != 0:
+		print(total_speed)
+		$BodyParts/AnimationPlayer.speed_scale = total_speed / 2
+		$BodyParts/AnimationPlayer.play('skate')

@@ -1,0 +1,9 @@
+[gd_resource type="CylinderMesh" load_steps=2 format=3 uid="uid://dlpw23ullbuev"]
+
+[ext_resource type="Material" uid="uid://b354k7sbfe8q7" path="res://material/cellshade_black_inside.tres" id="1_fuiej"]
+
+[resource]
+material = ExtResource("1_fuiej")
+height = 0.05
+radial_segments = 16
+rings = 1
