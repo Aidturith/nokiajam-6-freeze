@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cstdudqa7kwjk"]
+[gd_scene load_steps=26 format=3 uid="uid://cstdudqa7kwjk"]
 
 [ext_resource type="Script" path="res://scene/player.gd" id="1_68mff"]
 [ext_resource type="Material" uid="uid://b354k7sbfe8q7" path="res://material/cellshade_black_inside.tres" id="2_f08lt"]
@@ -8,34 +8,33 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1wq88"]
 
-[sub_resource type="Animation" id="Animation_xpmwb"]
-resource_name = "skate"
-length = 4.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow3D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.5, 1.0, 0.0]
+[sub_resource type="Curve3D" id="Curve3D_bttiu"]
+_data = {
+"points": PackedVector3Array(0, 0.2, 0, 0, -0.2, 0, 0.2, 0.1, -0.4, 0, 0, 0, 0, 0, 0, 0.2, -0.15, 0, 0, -0.2, 0, 0, 0, 0, 0.2, 0.1, 0.4),
+"tilts": PackedFloat32Array(0, 0, 0)
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../PathRight/PathFollow3D:progress_ratio")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [1.0, 0.5, 0.0, 1.0]
+point_count = 3
+
+[sub_resource type="BoxMesh" id="BoxMesh_hiogk"]
+lightmap_size_hint = Vector2i(5, 8)
+material = ExtResource("2_f08lt")
+flip_faces = true
+add_uv2 = true
+size = Vector3(0.1, 0.1, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uxdpd"]
+lightmap_size_hint = Vector2i(6, 9)
+material = ExtResource("3_dh2yh")
+flip_faces = true
+add_uv2 = true
+size = Vector3(0.175, 0.175, 0.3)
+
+[sub_resource type="Curve3D" id="Curve3D_hjed0"]
+_data = {
+"points": PackedVector3Array(0, 0.2, 0, 0, -0.2, 0, -0.2, 0.1, -0.4, 0, 0, 0, 0, 0, 0, -0.2, -0.15, 0, 0, -0.2, 0, 0, 0, 0, -0.2, 0.1, 0.4),
+"tilts": PackedFloat32Array(0, 0, 0)
 }
+point_count = 3
 
 [sub_resource type="Animation" id="Animation_mxo0f"]
 length = 0.001
@@ -93,40 +92,112 @@ tracks/1/keys = {
 "values": [0.6, 0.5, 0.4, 0.6]
 }
 
+[sub_resource type="Animation" id="Animation_xpmwb"]
+resource_name = "skate"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.5, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PathRight/PathFollow3D:progress_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.5, 0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_anook"]
+resource_name = "slide"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.55]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PathRight/PathFollow3D:progress_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.55]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_whc6r"]
 _data = {
 "RESET": SubResource("Animation_mxo0f"),
 "idle": SubResource("Animation_cyqf2"),
-"skate": SubResource("Animation_xpmwb")
+"skate": SubResource("Animation_xpmwb"),
+"slide": SubResource("Animation_anook")
 }
 
-[sub_resource type="Curve3D" id="Curve3D_bttiu"]
-_data = {
-"points": PackedVector3Array(0, 0.2, 0, 0, -0.2, 0, 0.2, 0.1, -0.4, 0, 0, 0, 0, 0, 0, 0.2, -0.15, 0, 0, -0.2, 0, 0, 0, 0, 0.2, 0.1, 0.4),
-"tilts": PackedFloat32Array(0, 0, 0)
-}
-point_count = 3
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iktjq"]
+animation = &"idle"
 
-[sub_resource type="BoxMesh" id="BoxMesh_hiogk"]
-lightmap_size_hint = Vector2i(5, 8)
-material = ExtResource("2_f08lt")
-flip_faces = true
-add_uv2 = true
-size = Vector3(0.1, 0.1, 0.2)
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_itkc7"]
+animation = &"skate"
 
-[sub_resource type="BoxMesh" id="BoxMesh_uxdpd"]
-lightmap_size_hint = Vector2i(6, 9)
-material = ExtResource("3_dh2yh")
-flip_faces = true
-add_uv2 = true
-size = Vector3(0.175, 0.175, 0.3)
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xnv1q"]
+animation = &"slide"
 
-[sub_resource type="Curve3D" id="Curve3D_hjed0"]
-_data = {
-"points": PackedVector3Array(0, 0.2, 0, 0, -0.2, 0, -0.2, 0.1, -0.4, 0, 0, 0, 0, 0, 0, -0.2, -0.15, 0, 0, -0.2, 0, 0, 0, 0, -0.2, 0.1, 0.4),
-"tilts": PackedFloat32Array(0, 0, 0)
-}
-point_count = 3
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t7p46"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sbd3d"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4xmki"]
+switch_mode = 1
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_svjqu"]
+switch_mode = 1
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t3sth"]
+switch_mode = 1
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uc6w0"]
+switch_mode = 1
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_71myd"]
+states/End/position = Vector2(890, 98)
+states/Start/position = Vector2(187, 127)
+states/idle/node = SubResource("AnimationNodeAnimation_iktjq")
+states/idle/position = Vector2(503, 53)
+states/skate/node = SubResource("AnimationNodeAnimation_itkc7")
+states/skate/position = Vector2(419, 187)
+states/slide/node = SubResource("AnimationNodeAnimation_xnv1q")
+states/slide/position = Vector2(601, 187)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_t7p46"), "idle", "End", SubResource("AnimationNodeStateMachineTransition_sbd3d"), "idle", "skate", SubResource("AnimationNodeStateMachineTransition_4xmki"), "skate", "slide", SubResource("AnimationNodeStateMachineTransition_svjqu"), "slide", "idle", SubResource("AnimationNodeStateMachineTransition_t3sth"), "slide", "skate", SubResource("AnimationNodeStateMachineTransition_uc6w0")]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_68mff")
@@ -138,17 +209,11 @@ shape = SubResource("SphereShape3D_1wq88")
 
 [node name="BodyParts" type="Node3D" parent="."]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BodyParts"]
-root_node = NodePath("../PathLeft")
-libraries = {
-"": SubResource("AnimationLibrary_whc6r")
-}
-
 [node name="PathLeft" type="Path3D" parent="BodyParts"]
 curve = SubResource("Curve3D_bttiu")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="BodyParts/PathLeft"]
-transform = Transform3D(9.00421e-08, 1, -7.41319e-08, 0.847968, -3.70672e-08, 0.529981, 0.52998, -1.1059e-07, -0.84797, 0.2, -0.15, 0)
+transform = Transform3D(9.00378e-08, 1, -7.41281e-08, 0.847927, -3.70672e-08, 0.529954, 0.529954, -1.1059e-07, -0.847927, 0.2, -0.15, 0)
 progress = 0.502128
 
 [node name="LeftFoot" type="MeshInstance3D" parent="BodyParts/PathLeft/PathFollow3D"]
@@ -163,7 +228,7 @@ skeleton = NodePath("../../../..")
 curve = SubResource("Curve3D_hjed0")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="BodyParts/PathRight"]
-transform = Transform3D(9.00424e-08, 0.999997, -7.41319e-08, 0.84797, -3.70671e-08, 0.529981, 0.529981, -1.10589e-07, -0.84797, -0.2, -0.15, 0)
+transform = Transform3D(9.00378e-08, 0.999997, -7.41281e-08, 0.847927, -3.70671e-08, 0.529954, 0.529954, -1.10589e-07, -0.847927, -0.2, -0.15, 0)
 progress = 0.502128
 
 [node name="RightFoot" type="MeshInstance3D" parent="BodyParts/PathRight/PathFollow3D"]
@@ -185,3 +250,17 @@ skeleton = NodePath("../..")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.386246, 1.46791)
 current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BodyParts/PathLeft")
+libraries = {
+"": SubResource("AnimationLibrary_whc6r")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../BodyParts/PathLeft")
+libraries = {
+"": SubResource("AnimationLibrary_whc6r")
+}
+tree_root = SubResource("AnimationNodeStateMachine_71myd")
+anim_player = NodePath("../AnimationPlayer")
