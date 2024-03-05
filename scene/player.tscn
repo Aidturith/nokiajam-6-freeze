@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cstdudqa7kwjk"]
+[gd_scene load_steps=27 format=3 uid="uid://cstdudqa7kwjk"]
 
 [ext_resource type="Script" path="res://scene/player.gd" id="1_68mff"]
 [ext_resource type="Material" uid="uid://b354k7sbfe8q7" path="res://material/cellshade_black_inside.tres" id="2_f08lt"]
@@ -103,10 +103,10 @@ tracks/0/path = NodePath("PathFollow3D:progress_ratio")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.5, 1.0, 0.0]
+"values": [0.5, 0.0, 0.5, 1.0, 0.5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -115,10 +115,10 @@ tracks/1/path = NodePath("../PathRight/PathFollow3D:progress_ratio")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [1.0, 0.5, 0.0, 1.0]
+"values": [0.5, 1.0, 0.5, 0.0, 0.5]
 }
 
 [sub_resource type="Animation" id="Animation_anook"]
@@ -160,44 +160,52 @@ _data = {
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iktjq"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_itkc7"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7h3fo"]
 animation = &"skate"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_edhbd"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_as6t5"]
+nodes/Animation/node = SubResource("AnimationNodeAnimation_7h3fo")
+nodes/Animation/position = Vector2(220, 80)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_edhbd")
+nodes/TimeScale/position = Vector2(420, 60)
+nodes/output/position = Vector2(620, 60)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xnv1q"]
 animation = &"slide"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t7p46"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fnxr2"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sbd3d"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_10ggh"]
 advance_mode = 2
+advance_condition = &"skating"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4xmki"]
-switch_mode = 1
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ot7vb"]
 advance_mode = 2
+advance_condition = &"sliding"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_svjqu"]
-switch_mode = 1
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_52jvo"]
 advance_mode = 2
+advance_condition = &"idle"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t3sth"]
-switch_mode = 1
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_13a6o"]
 advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uc6w0"]
-switch_mode = 1
-advance_mode = 2
+advance_condition = &"skating"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_71myd"]
 states/End/position = Vector2(890, 98)
 states/Start/position = Vector2(187, 127)
 states/idle/node = SubResource("AnimationNodeAnimation_iktjq")
 states/idle/position = Vector2(503, 53)
-states/skate/node = SubResource("AnimationNodeAnimation_itkc7")
-states/skate/position = Vector2(419, 187)
+states/skate_speed/node = SubResource("AnimationNodeBlendTree_as6t5")
+states/skate_speed/position = Vector2(432, 179)
 states/slide/node = SubResource("AnimationNodeAnimation_xnv1q")
 states/slide/position = Vector2(601, 187)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_t7p46"), "idle", "End", SubResource("AnimationNodeStateMachineTransition_sbd3d"), "idle", "skate", SubResource("AnimationNodeStateMachineTransition_4xmki"), "skate", "slide", SubResource("AnimationNodeStateMachineTransition_svjqu"), "slide", "idle", SubResource("AnimationNodeStateMachineTransition_t3sth"), "slide", "skate", SubResource("AnimationNodeStateMachineTransition_uc6w0")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_fnxr2"), "idle", "skate_speed", SubResource("AnimationNodeStateMachineTransition_10ggh"), "skate_speed", "slide", SubResource("AnimationNodeStateMachineTransition_ot7vb"), "slide", "idle", SubResource("AnimationNodeStateMachineTransition_52jvo"), "slide", "skate_speed", SubResource("AnimationNodeStateMachineTransition_13a6o")]
+graph_offset = Vector2(23, 7)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_68mff")
@@ -213,7 +221,7 @@ shape = SubResource("SphereShape3D_1wq88")
 curve = SubResource("Curve3D_bttiu")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="BodyParts/PathLeft"]
-transform = Transform3D(9.00378e-08, 1, -7.41281e-08, 0.847927, -3.70672e-08, 0.529954, 0.529954, -1.1059e-07, -0.847927, 0.2, -0.15, 0)
+transform = Transform3D(9.00304e-08, 1, -7.4122e-08, 0.847857, -3.70672e-08, 0.529911, 0.529911, -1.1059e-07, -0.847857, 0.2, -0.15, 0)
 progress = 0.502128
 
 [node name="LeftFoot" type="MeshInstance3D" parent="BodyParts/PathLeft/PathFollow3D"]
@@ -228,7 +236,7 @@ skeleton = NodePath("../../../..")
 curve = SubResource("Curve3D_hjed0")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="BodyParts/PathRight"]
-transform = Transform3D(9.00378e-08, 0.999997, -7.41281e-08, 0.847927, -3.70671e-08, 0.529954, 0.529954, -1.10589e-07, -0.847927, -0.2, -0.15, 0)
+transform = Transform3D(9.00305e-08, 0.999997, -7.41221e-08, 0.847858, -3.70671e-08, 0.529911, 0.529911, -1.10589e-07, -0.847858, -0.2, -0.15, 0)
 progress = 0.502128
 
 [node name="RightFoot" type="MeshInstance3D" parent="BodyParts/PathRight/PathFollow3D"]
@@ -252,15 +260,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.386246, 1.46791)
 current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 root_node = NodePath("../BodyParts/PathLeft")
 libraries = {
 "": SubResource("AnimationLibrary_whc6r")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../BodyParts/PathLeft")
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/../BodyParts/PathLeft")
 libraries = {
 "": SubResource("AnimationLibrary_whc6r")
 }
 tree_root = SubResource("AnimationNodeStateMachine_71myd")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/skating = false
+parameters/conditions/sliding = false
+parameters/skate_speed/TimeScale/scale = 1.0

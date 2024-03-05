@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@onready var animation_tree = %AnimationTree
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -7,8 +8,8 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-func _ready():
-	$BodyParts/AnimationPlayer.play('idle')
+# func _ready():
+	# $AnimationPlayer.play('idle')
 
 
 func _physics_process(delta):
@@ -41,20 +42,27 @@ func _physics_process(delta):
 	# print(rotation.y)
 
 	move_and_slide()
+	update_state()
 	
-	var total_speed = velocity.x + velocity.y + velocity.z
-	if total_speed != 0:
-		print(total_speed)
-		$BodyParts/AnimationPlayer.speed_scale = total_speed / 2
-		$BodyParts/AnimationPlayer.play('skate')
 
 func update_state():
-	var player_input = false
+	var skating = is_skating()
+	var sliding = is_sliding()
+	var idle = is_idle()
+	animation_tree.set("parameters/conditions/skating", skating)
+	animation_tree.set("parameters/conditions/sliding", sliding)
+	animation_tree.set("parameters/conditions/idle", idle)
+	animation_tree.set("parameters/skate_speed/TimeScale/scale", velocity.length() / 2)
+
+func is_skating():
 	if Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down"):
-		player_input = true
-	var momentum = false
-	if velocity:
-		momentum = true
-	$AnimationTree.set("parameters/conditions/idle", not player_input and not momentum)
-	$AnimationTree.set("parameters/conditions/skate", player_input)
-	$AnimationTree.set("parameters/conditions/slide", not player_input and momentum)
+		return true
+	return false
+
+func is_sliding():
+	if velocity and not is_skating():
+		return true
+	return false
+
+func is_idle():
+	return not is_sliding()
